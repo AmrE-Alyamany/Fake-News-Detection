@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+    <title>Fake DisasterTweet Detection</title>
+</head>
+
+<body>
+
+    <div class='container'>
+        <div class="full-form col-6">
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            {% if msg %}
+            <div class="alert alert-success">{{ msg }}</div>
+            {% endif %}
+
+            <h1>Fake Disaster Tweet Detection</h1>
+            <p class="lead">Simpel web api/service to detect fake <span>Disaster Tweet</span> based on ensembel machine
+                learning model called voting classifier</p>
+            <div class='image'>
+                <img src="{{ url_for('static', filename = 'img/twitter.png') }}">
+            </div>
+            <form method='post' action='/api' class="form-group">
+                <textarea id='tweet' placeholder='Write your tweet here ...' name='tweet' class="form-control">{% if tweet%}{{ tweet }}{% endif %}
+    </textarea>
+                <input type='submit' value='test your tweet' class="btn btn-primary">
+                <button id='clearTweet' class="btn btn-danger">Clear Tweet</button>
+            </form>
+        </div>
+        <div class="svg col-6">
+            <img src="{{ url_for('static', filename = 'img/analize.png') }}">
+        </div>
+    </div>
+
+    <script>
+        clearBtn = document.getElementById("clearTweet")
+        tweet = document.getElementById("tweet")
+        clearBtn.onclick = function (e) {
+            e.preventDefault()
+            tweet.value = "";
+        }
+    </script>
+</body>
+
+</html>
